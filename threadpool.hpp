@@ -3,21 +3,22 @@
 #include <iostream>
 #include <queue>
 #include <pthread.h>
+#include "tcpsocket.hpp"
 
 #define MAX_THREAD  5
 typedef bool (*handler_t)(int);
 class ThreadTask
 {
     private:
-        int _sock;
+        TcpSocket _sock;
         handler_t _handler;
     public:
-        ThreadTask():_sock(-1), _handler(NULL) {}
-        ThreadTask(int sock, handler_t handler) {
+        ThreadTask(){}
+        ThreadTask(TcpSocket sock, handler_t handler) {
             _sock = sock;
             _handler = handler;
         }
-        void tt_SetTask(int sock, handler_t handler) {
+        void tt_SetTask(TcpSocket sock, handler_t handler) {
             _sock = sock;
             _handler = handler;
         }
